@@ -1,0 +1,10 @@
+<h1>Register</h1>
+<form (ngSubmit)="register()" [formGroup]="registerForm">
+  <input type="text" formControlName="username" />
+  {{ f.username.errors | json }}
+  <input type="text" formControlName="password" />
+  {{ f.password.errors | json }}
+  <input type="text" formControlName="passwordConfirmation" />
+  {{ f.passwordConfirmation.errors | json }}
+  <input type="submit" value="Submit" />
+</form>

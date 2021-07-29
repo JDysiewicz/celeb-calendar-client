@@ -25,3 +25,16 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+# TODO
+
+- Create login component and attempt to connect to backend
+- Attempt to register for account
+- When on calendar component connect to backend and get all celebs
+- Create account type (can create celeb or fan account)
+  - Recheck requirements when creating celeb; requires more info, dynamically show this if user selected "celeb" from drop down
+- Create CelebService(?) which will take care of CRUD for celeb data
+- Create a LoginService(?) -> will be lots of info online about creating login solution
+- Create calendar page
+- Display celeb information in correct calendar slot
+- Cycle through months; show month-by-month calendar
