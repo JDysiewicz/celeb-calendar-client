@@ -1,1 +1,10 @@
-<p>login works!</p>
+<h1>Sign In</h1>
+<form (ngSubmit)="onSubmit()" [formGroup]="loginForm">
+  <input type="text" formControlName="username" />
+  {{ f.username.errors | json }}
+  <input type="text" formControlName="password" />
+  {{ f.password.errors | json }}
+  <input type="submit" value="Submit" />
+</form>
+
+<button (click)="check()">Check cookies works</button>

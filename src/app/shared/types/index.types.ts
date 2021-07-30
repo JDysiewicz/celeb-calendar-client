@@ -7,6 +7,11 @@ export interface SignUpCredentials {
   celebInfo?: Celeb;
 }
 
+export interface SignInCredentials {
+  username: string;
+  password: string;
+}
+
 export type AccountPermissions = 'admin' | 'celeb' | 'manager' | 'fan';
 
 export interface SignUpApiParams {

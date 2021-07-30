@@ -59,18 +59,14 @@ export class RegisterComponent {
 
   // Pass in user credentials from authForm https://www.udemy.com/course/the-modern-angular-bootcamp/learn/lecture/17869670#overview
   register() {
-    console.log('HI');
     if (this.registerForm.invalid) {
-      console.log(this.registerForm.value);
       return;
     }
     const registerInput: SignUpCredentials = this.buildRegisterInput(
       this.registerForm.value
     );
-    console.log(registerInput);
 
-    const obs$ = this.authService.register(registerInput);
-    obs$.subscribe(
+    return this.authService.register(registerInput).subscribe(
       (response) => console.log('RESP', response),
       (error) => console.log('ERR', error)
     );
