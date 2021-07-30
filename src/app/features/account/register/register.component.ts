@@ -57,7 +57,7 @@ export class RegisterComponent {
     return this.registerForm.controls;
   }
 
-  // Pass in user credentials from authForm https://www.udemy.com/course/the-modern-angular-bootcamp/learn/lecture/17869670#overview
+  // TODO on register, redirect to sign in screen
   register() {
     if (this.registerForm.invalid) {
       return;

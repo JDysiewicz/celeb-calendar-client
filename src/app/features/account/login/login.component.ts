@@ -31,14 +31,24 @@ export class LoginComponent implements OnInit {
       return;
     }
 
+    // TODO on sign in redirect to calendar page
     return this.authService.signIn(this.loginForm.value).subscribe(
       (response) => console.log('RESPONSE', response),
       (error) => console.log('ERROR', error)
     );
   }
 
+  // DELETE THIS; ONLY HERE FOR CHECKING COOKIES
   check() {
     return this.authService.check().subscribe(
+      (response) => console.log('RES', response),
+      (error) => console.log('ERR', error)
+    );
+  }
+
+  // DELETE THIS; PLACE IN BETTER PLACE
+  signOut() {
+    return this.authService.signOut().subscribe(
       (response) => console.log('RES', response),
       (error) => console.log('ERR', error)
     );

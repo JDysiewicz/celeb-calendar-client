@@ -8,6 +8,8 @@ import {
 import { User } from '../shared/models/user.model';
 import { map } from 'rxjs/operators';
 
+// TODO find way to persist user login state in Angular app; already stores user login cookie so need a way
+// to access user info when user is signed in, and set to null when user logs out
 @Injectable({
   providedIn: 'root',
 })
@@ -33,10 +35,19 @@ export class AuthService {
       .pipe(map((response) => response.data));
   }
 
+  // DELETE THIS; ONLY HERE FOR CHECKING COOKIES
   check() {
     return this.http.get<any>('http://127.0.0.1:4000/api/users', {
       withCredentials: true,
     });
+  }
+
+  signOut() {
+    return this.http.post<{ message: string }>(
+      'http://127.0.0.1:4000/api/users/sign_out',
+      {},
+      { withCredentials: true }
+    );
   }
 
   // user data and celeb data (if applicable) needs to be passed in this format as this is what API expects
