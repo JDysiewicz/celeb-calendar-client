@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/core/auth.service';
+import { ApiError } from 'src/app/shared/models/apiError.model';
 
 @Component({
   selector: 'app-login',
@@ -34,12 +35,20 @@ export class LoginComponent implements OnInit {
     // TODO on sign in redirect to calendar page
     return this.authService.signIn(this.loginForm.value).subscribe(
       (response) => {
-        console.log('RESPONSE', response);
+        this.loginForm.reset();
         this.authService.user.next(response);
+        alert(`Welcome, ${this.authService.user.getValue()?.username}`);
       },
       (error) => {
-        console.log('ERROR', error);
-        console.log(error.error.errors.detail);
+        const errorObj = new ApiError(
+          error.status,
+          error.error.errors.detail,
+          error
+        );
+        errorObj.processError();
+        if (errorObj.getCode == 401) {
+          this.loginForm.reset();
+        }
       }
     );
   }
@@ -55,8 +64,15 @@ export class LoginComponent implements OnInit {
   // DELETE THIS; PLACE IN BETTER PLACE
   signOut() {
     return this.authService.signOut().subscribe(
-      (response) => console.log('RES', response),
-      (error) => console.log('ERR', error)
+      (response) => alert(response.message),
+      (error) => {
+        const errorObj = new ApiError(
+          error.status,
+          error.error.errors.detail,
+          error
+        );
+        errorObj.processError();
+      }
     );
   }
 }

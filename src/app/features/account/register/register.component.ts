@@ -3,6 +3,7 @@ import { AuthService } from 'src/app/core/auth.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MustMatch } from 'src/app/shared/utils/must-match.validator';
 import { SignUpCredentials } from 'src/app/shared/types/index.types';
+import { ApiError } from 'src/app/shared/models/apiError.model';
 
 @Component({
   selector: 'app-register',
@@ -67,8 +68,16 @@ export class RegisterComponent {
     );
 
     return this.authService.register(registerInput).subscribe(
-      (response) => console.log('RESP', response),
-      (error) => console.log('ERR', error)
+      (response) => alert(`Successfully created account: ${response.username}`),
+      (error) => {
+        this.registerForm.reset();
+        const errorObj = new ApiError(
+          error.status,
+          error.error.errors.detail,
+          error
+        );
+        errorObj.processError();
+      }
     );
   }
 

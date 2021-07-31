@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from './core/auth.service';
+import { ApiError } from './shared/models/apiError.model';
 
 @Component({
   selector: 'app-root',
@@ -12,16 +13,20 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     this.authService.currentUser().subscribe(
       (response) => {
-        console.log('RESPONSE', response);
         this.authService.user.next(response);
       },
       (error) => {
-        if (error.status == 401) {
-          console.log('NO USER');
-        } else {
-          console.log('INTERNVAL SERVER ERROR: ', error);
-        }
         this.authService.user.next(null);
+        const errorObj = new ApiError(
+          error.status,
+          error.error.errors.detail,
+          error
+        );
+        if (errorObj.getCode == 401) {
+          console.log('No user');
+        } else {
+          errorObj.processError();
+        }
       }
     );
   }

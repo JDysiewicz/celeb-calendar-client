@@ -21,14 +21,14 @@ export class AuthService {
 
   signIn(credentials: SignInCredentials) {
     return this.http
-      .post<{ data: User }>(
+      .post<{ data: { user: User } }>(
         'http://127.0.0.1:4000/api/users/sign_in',
         credentials,
         {
           withCredentials: true,
         }
       )
-      .pipe(map((response) => response.data));
+      .pipe(map((response) => response.data.user));
   }
 
   register(credentials: SignUpCredentials) {
@@ -46,14 +46,13 @@ export class AuthService {
   }
 
   currentUser() {
-    console.log('SOMETHING');
     return this.http
-      .get<{ data: User }>(
+      .get<{ data: { user: User } }>(
         'http://127.0.0.1:4000/api/users/current',
 
         { withCredentials: true }
       )
-      .pipe(map((response) => response.data));
+      .pipe(map((response) => response.data.user));
   }
 
   signOut() {
