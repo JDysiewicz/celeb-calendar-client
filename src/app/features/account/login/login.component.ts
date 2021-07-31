@@ -33,8 +33,14 @@ export class LoginComponent implements OnInit {
 
     // TODO on sign in redirect to calendar page
     return this.authService.signIn(this.loginForm.value).subscribe(
-      (response) => console.log('RESPONSE', response),
-      (error) => console.log('ERROR', error)
+      (response) => {
+        console.log('RESPONSE', response);
+        this.authService.user.next(response);
+      },
+      (error) => {
+        console.log('ERROR', error);
+        console.log(error.error.errors.detail);
+      }
     );
   }
 

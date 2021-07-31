@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import {
   SignInCredentials,
@@ -7,6 +7,7 @@ import {
 } from '../shared/types/index.types';
 import { User } from '../shared/models/user.model';
 import { map } from 'rxjs/operators';
+import { BehaviorSubject } from 'rxjs';
 
 // TODO find way to persist user login state in Angular app; already stores user login cookie so need a way
 // to access user info when user is signed in, and set to null when user logs out
@@ -14,6 +15,8 @@ import { map } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class AuthService {
+  user: BehaviorSubject<User | null> = new BehaviorSubject<User | null>(null);
+
   constructor(private http: HttpClient) {}
 
   signIn(credentials: SignInCredentials) {
@@ -40,6 +43,17 @@ export class AuthService {
     return this.http.get<any>('http://127.0.0.1:4000/api/users', {
       withCredentials: true,
     });
+  }
+
+  currentUser() {
+    console.log('SOMETHING');
+    return this.http
+      .get<{ data: User }>(
+        'http://127.0.0.1:4000/api/users/current',
+
+        { withCredentials: true }
+      )
+      .pipe(map((response) => response.data));
   }
 
   signOut() {
