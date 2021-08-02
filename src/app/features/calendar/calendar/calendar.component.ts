@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MonthString } from 'src/app/shared/types/index.types';
+import { MonthString } from 'src/app/core/models/index.types';
 
 @Component({
   selector: 'app-calendar',

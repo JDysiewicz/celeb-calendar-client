@@ -1,32 +1,49 @@
-# CelebCalendar
+# Celeb Calendar
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.1.2.
+## Project Structure
 
-## Development server
+Angular projects should always follow a similar structure with regards to the use and importing of `modules`:
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+- **CoreModule**: Defines singletons and services. In here, place all services (e.g. API interactions using HttpClient), and _static_ (will never change regardless of app state) components/guards/models... This should only ever be imported by the AppModule (see below) and no where else. If you need to import the CoreModule elsewhere, you're doing something wrong.
+- **SharedModule**: Imports and re-exports all modules used elsewhere, rather than importing/exporting the same modules into different modules. Feature modules (see below), should only be importing the SharedModule (and any routing module).
+- **FeatureModules**: These should contain components specfic to that feature (e.g. an `accounts` feature could include the `register` and `login` components).
+- **AppModule**: The entry point for Angular applications; imports the CoreModule.
 
-## Code scaffolding
+This gives all Angular projects a similar dependency chain and overall architecture.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Folder structure should look something similar to:
 
-## Build
+```
+src
+|> app
+    |> core
+        |> components
+        |> services
+        |> utils
+        ...
+        |> core.module.ts
+    |> features
+          |> feature-a
+                |> components
+                |> feature-a.module.ts
+                |> feature-a-routing.module.ts
+          |> feature-b ....
+    |> shared
+          |> components
+          |> layout
+                |> header
+                      |> header.component.{html|css|ts}
+                |> footer
+                |> ....
+          |> shared.module.ts
+    |> app-routing.module.ts
+    |> app.component.{html|css|ts}
+    |> app.module.ts
+```
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+Note the exact folders created will depend so don't take this as gospel, however follow a similar style to this.
 
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
-
-# TODO
+## TODO
 
 - Create login component and attempt to connect to backend
 - Attempt to register for account

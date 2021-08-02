@@ -1,4 +1,4 @@
-import { AccountPermissions } from '../types/index.types';
+import { AccountPermissions } from './index.types';
 
 export interface User {
   id: string;

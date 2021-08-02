@@ -1,15 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from 'src/app/core/auth.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { MustMatch } from 'src/app/shared/utils/must-match.validator';
-import {
-  AccountPermissions,
-  SignUpCredentials,
-} from 'src/app/shared/types/index.types';
-import { ApiError } from 'src/app/shared/models/apiError.model';
 import { faLock, faUser } from '@fortawesome/free-solid-svg-icons';
 import { Router } from '@angular/router';
-import { CelebSignUp } from 'src/app/shared/models/celeb.model';
+import { MustMatch } from 'src/app/core/utils/must-match.validator';
+import { SignUpCredentials } from 'src/app/core/models/index.types';
+import { ApiError } from 'src/app/core/models/apiError.model';
+import { CelebSignUp } from 'src/app/core/models/celeb.model';
+import { AuthService } from 'src/app/core/services/auth.service';
 
 @Component({
   selector: 'app-register',

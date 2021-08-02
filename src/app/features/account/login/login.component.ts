@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { faLock, faUser } from '@fortawesome/free-solid-svg-icons';
-import { AuthService } from 'src/app/core/auth.service';
-import { ApiError } from 'src/app/shared/models/apiError.model';
+import { ApiError } from 'src/app/core/models/apiError.model';
+import { AuthService } from 'src/app/core/services/auth.service';
 
 @Component({
   selector: 'app-login',

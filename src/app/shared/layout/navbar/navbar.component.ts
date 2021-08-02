@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from 'src/app/core/auth.service';
-import { ApiError } from '../../models/apiError.model';
+import { ApiError } from 'src/app/core/models/apiError.model';
+import { AuthService } from 'src/app/core/services/auth.service';
 
 @Component({
   selector: 'app-navbar',
