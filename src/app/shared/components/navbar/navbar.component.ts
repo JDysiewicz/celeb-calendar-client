@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthService } from 'src/app/core/auth.service';
 import { ApiError } from '../../models/apiError.model';
 
@@ -8,7 +9,7 @@ import { ApiError } from '../../models/apiError.model';
   styleUrls: ['./navbar.component.css'],
 })
 export class NavbarComponent implements OnInit {
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit(): void {}
 
@@ -21,6 +22,7 @@ export class NavbarComponent implements OnInit {
       (response) => {
         this.authService.user.next(null);
         alert(response.message);
+        this.router.navigate(['/login']);
       },
       (error) => {
         const errorObj = new ApiError(

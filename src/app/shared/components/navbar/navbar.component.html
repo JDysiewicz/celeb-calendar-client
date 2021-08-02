@@ -1,15 +1,60 @@
-<a [routerLink]="['/']" routerLinkActive="router-link-active">Home</a>
-<a [routerLink]="['/calendar']" routerLinkActive="router-link-active"
-  >Calendar</a
->
-<a [routerLink]="['/register']" routerLinkActive="router-link-active"
-  >Register</a
->
-<a
-  *ngIf="currentUser() == null"
-  [routerLink]="['/login']"
-  routerLinkActive="router-link-active"
-  >Login</a
->
+<nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a
+      role="button"
+      class="navbar-burger"
+      aria-label="menu"
+      aria-expanded="false"
+      data-target="navbarBasicExample"
+    >
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
 
-<button *ngIf="currentUser() !== null" (click)="signOut()">Sign out</button>
+  <div class="navbar-menu">
+    <div class="navbar-start">
+      <a
+        class="navbar-item is-size-4"
+        [routerLink]="['/']"
+        routerLinkActive="router-link-active"
+        [routerLinkActiveOptions]="{ exact: true }"
+        >Home</a
+      >
+      <a
+        class="navbar-item is-size-4"
+        [routerLink]="['/calendar']"
+        routerLinkActive="router-link-active"
+        >Calendar</a
+      >
+    </div>
+
+    <div class="navbar-end">
+      <div class="navbar-item">
+        <div class="buttons">
+          <a
+            class="button is-primary"
+            [routerLink]="['/register']"
+            routerLinkActive="router-link-active"
+            >Register</a
+          >
+          <a
+            class="button is-light"
+            *ngIf="currentUser() == null"
+            [routerLink]="['/login']"
+            routerLinkActive="router-link-active"
+            >Login</a
+          >
+          <button
+            class="button is-light"
+            *ngIf="currentUser() !== null"
+            (click)="signOut()"
+          >
+            Sign out
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>

@@ -1,0 +1,8 @@
+a.navbar-item.router-link-active {
+  background-color: #fafafa;
+  color: red;
+}
+
+nav {
+  background-color: #fafafa;
+}
