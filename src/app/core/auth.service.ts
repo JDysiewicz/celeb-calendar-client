@@ -32,9 +32,8 @@ export class AuthService {
   }
 
   register(credentials: SignUpCredentials) {
-    const userParams = this.createUserParams(credentials);
     return this.http
-      .post<{ data: User }>('http://127.0.0.1:4000/api/users', userParams)
+      .post<{ data: User }>('http://127.0.0.1:4000/api/users', credentials)
       .pipe(map((response) => response.data));
   }
 
@@ -61,22 +60,5 @@ export class AuthService {
       {},
       { withCredentials: true }
     );
-  }
-
-  // user data and celeb data (if applicable) needs to be passed in this format as this is what API expects
-  private createUserParams(credentials: SignUpCredentials) {
-    let userParams: SignUpApiParams = {
-      user: {
-        username: credentials.username,
-        password: credentials.password,
-        perm: credentials.perm,
-      },
-    };
-
-    if (credentials.celebInfo) {
-      userParams.celeb = credentials.celebInfo;
-    }
-
-    return userParams;
   }
 }

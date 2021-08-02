@@ -1,10 +1,8 @@
-import { Celeb } from '../models/celeb.model';
+import { Celeb, CelebSignUp } from '../models/celeb.model';
 
 export interface SignUpCredentials {
-  username: string;
-  password: string;
-  perm: AccountPermissions;
-  celebInfo?: Celeb;
+  user: { username: string; password: string; perm: AccountPermissions };
+  celeb?: CelebSignUp;
 }
 
 export interface SignInCredentials {

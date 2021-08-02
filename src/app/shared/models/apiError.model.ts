@@ -16,7 +16,9 @@ export class ApiError {
   processError() {
     switch (this.code) {
       case 400:
-        return alert(this.message);
+        return console.log(
+          `Bad Request Error: ${JSON.stringify(this.rawError, null, 2)}`
+        );
       case 401:
         return console.log(
           `Forbidden Error: ${JSON.stringify(this.rawError, null, 2)}`
