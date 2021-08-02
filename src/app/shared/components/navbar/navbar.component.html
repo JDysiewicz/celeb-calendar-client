@@ -5,4 +5,11 @@
 <a [routerLink]="['/register']" routerLinkActive="router-link-active"
   >Register</a
 >
-<a [routerLink]="['/login']" routerLinkActive="router-link-active">Login</a>
+<a
+  *ngIf="currentUser() == null"
+  [routerLink]="['/login']"
+  routerLinkActive="router-link-active"
+  >Login</a
+>
+
+<button *ngIf="currentUser() !== null" (click)="signOut()">Sign out</button>

@@ -5,6 +5,8 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { CoreModule } from 'src/app/core/core.module';
 import { ReactiveFormsModule } from '@angular/forms';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [LoginComponent, RegisterComponent],
@@ -13,6 +15,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     AccountRoutingModule,
     CoreModule,
     ReactiveFormsModule,
+    FontAwesomeModule,
+    RouterModule,
   ],
 })
 export class AccountModule {}

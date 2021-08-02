@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { faLock, faUser } from '@fortawesome/free-solid-svg-icons';
 import { AuthService } from 'src/app/core/auth.service';
 import { ApiError } from 'src/app/shared/models/apiError.model';
 
@@ -10,10 +12,16 @@ import { ApiError } from 'src/app/shared/models/apiError.model';
 })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
+  faUser = faUser;
+  faLock = faLock;
+  submitted = false;
+  isSubmitting = false;
+  formErrorMessage = '';
 
   constructor(
     private authService: AuthService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -28,16 +36,21 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
+    this.submitted = true;
+
     if (this.loginForm.invalid) {
       return;
     }
+    this.isSubmitting = true;
 
     // TODO on sign in redirect to calendar page
     return this.authService.signIn(this.loginForm.value).subscribe(
       (response) => {
         this.loginForm.reset();
         this.authService.user.next(response);
+        this.isSubmitting = false;
         alert(`Welcome, ${this.authService.user.getValue()?.username}`);
+        this.router.navigate(['/calendar']);
       },
       (error) => {
         const errorObj = new ApiError(
@@ -46,8 +59,9 @@ export class LoginComponent implements OnInit {
           error
         );
         errorObj.processError();
+        this.isSubmitting = false;
         if (errorObj.getCode == 401) {
-          this.loginForm.reset();
+          this.formErrorMessage = errorObj.getMessage;
         }
       }
     );
@@ -61,18 +75,7 @@ export class LoginComponent implements OnInit {
     );
   }
 
-  // DELETE THIS; PLACE IN BETTER PLACE
-  signOut() {
-    return this.authService.signOut().subscribe(
-      (response) => alert(response.message),
-      (error) => {
-        const errorObj = new ApiError(
-          error.status,
-          error.error.errors.detail,
-          error
-        );
-        errorObj.processError();
-      }
-    );
+  showErrors(inputField: string) {
+    return this.f[inputField].errors && this.submitted;
   }
 }

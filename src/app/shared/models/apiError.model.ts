@@ -18,7 +18,9 @@ export class ApiError {
       case 400:
         return alert(this.message);
       case 401:
-        return alert(this.message);
+        return console.log(
+          `Forbidden Error: ${JSON.stringify(this.rawError, null, 2)}`
+        );
       case 403:
         return alert(this.message);
       case 500:

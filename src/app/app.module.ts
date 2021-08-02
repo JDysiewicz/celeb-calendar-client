@@ -7,6 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { SharedModule } from './shared/shared.module';
 import { CoreModule } from './core/core.module';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [AppComponent],
@@ -17,6 +18,7 @@ import { CoreModule } from './core/core.module';
     HttpClientModule,
     SharedModule,
     CoreModule,
+    FontAwesomeModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

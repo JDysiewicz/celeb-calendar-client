@@ -37,4 +37,9 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 - Create a LoginService(?) -> will be lots of info online about creating login solution
 - Create calendar page
 - Display celeb information in correct calendar slot
-- Cycle through months; show month-by-month calendar
+- Cycle through months; show month-by-month calendar : **DONE**
+- Add a request feature for celebs and managers to send pairing requests
+  - pairing_requests_table
+  - id: ID manager_id: UID celeb_id: UID status: "accepted" | "declined" | "pending" sent_by: UID
+  - Add a "Requests" page to celeb/manager dashboards which shows all requests with their UID in there (manager_id or celeb_id); if "sent_by" is them then add the status of the request, if "sent_by" is not their UID then add an "accept/decline" buttons which will add an entry to the "manager_celeb_link" table (id: ID celeb_id: UID manager_id: UID)
+  - Include an ability to delete pairings (removes from "manager_celeb_link" but not from "pairing_requests_table").
