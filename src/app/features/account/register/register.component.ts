@@ -20,7 +20,6 @@ export class RegisterComponent {
 
   constructor(private authService: AuthService, private router: Router) {}
 
-  // TODO on register, redirect to sign in screen
   onSubmit(formValues: RegisterFormValeus) {
     const userParams = {
       username: formValues.username,
