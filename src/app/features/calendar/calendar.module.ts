@@ -1,14 +1,10 @@
 import { NgModule } from '@angular/core';
-
 import { CalendarRoutingModule } from './calendar-routing.module';
-import { CalendarComponent } from './calendar/calendar.component';
-import { HomeComponent } from './home/home.component';
-
 import { SharedModule } from 'src/app/shared/shared.module';
-import { CoreModule } from 'src/app/core/core.module';
+import { CalendarPage } from './calendar.page';
 
 @NgModule({
-  declarations: [CalendarComponent, HomeComponent],
+  declarations: [CalendarPage],
   imports: [CalendarRoutingModule, SharedModule],
   exports: [],
 })

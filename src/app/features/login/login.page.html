@@ -1,0 +1,8 @@
+<app-form-layout>
+  <h1 class="title is-2">Sign In</h1>
+  <app-login-form
+    [isSubmitting]="isSubmitting"
+    [formErrorMessage]="formErrorMessage"
+    (formSubmit)="onSubmit($event)"
+  ></app-login-form>
+</app-form-layout>

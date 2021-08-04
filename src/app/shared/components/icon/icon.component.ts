@@ -3,8 +3,11 @@ import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
 
 @Component({
   selector: 'app-icon',
-  templateUrl: './icon.component.html',
-  styleUrls: ['./icon.component.css'],
+  template: `
+    <span class="icon is-small is-left">
+      <fa-icon [icon]="icon"></fa-icon>
+    </span>
+  `,
 })
 export class IconComponent {
   @Input() icon: IconDefinition;

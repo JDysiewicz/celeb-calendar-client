@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from './core/services/auth.service';
-import { ApiError } from './core/models/apiError.model';
+import { ApiError } from './shared/models/ApiError.model';
 
 @Component({
   selector: 'app-root',

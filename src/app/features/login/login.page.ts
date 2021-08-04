@@ -1,15 +1,15 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { ApiError } from 'src/app/core/models/apiError.model';
 import { AuthService } from 'src/app/core/services/auth.service';
+import { ApiError } from 'src/app/shared/models/ApiError.model';
 import { LoginForm } from './types';
 
 @Component({
   selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css'],
+  templateUrl: './login.page.html',
+  styleUrls: ['./login.page.css'],
 })
-export class LoginComponent {
+export class LoginPage {
   isSubmitting = false;
   formErrorMessage = '';
 

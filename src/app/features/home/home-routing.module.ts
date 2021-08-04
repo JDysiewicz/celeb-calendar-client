@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { CalendarPage } from './calendar.page';
+import { HomePage } from './home.page';
 
-const routes: Routes = [{ path: '', component: CalendarPage }];
+const routes: Routes = [{ path: '', component: HomePage }];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
 })
-export class CalendarRoutingModule {}
+export class HomeRoutingModule {}

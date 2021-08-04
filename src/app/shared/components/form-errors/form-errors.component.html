@@ -1,0 +1,14 @@
+<p *ngIf="f.username.errors['required']" class="help is-danger is-size-6">
+  Required
+</p>
+<p
+  *ngIf="f.username.errors['minlength'] || f.username.errors['maxlength']"
+  class="help is-danger is-size-6"
+>
+  Username must be 3-14 characters long
+</p>
+<p *ngIf="f.username.errors['pattern']" class="help is-danger is-size-6">
+  Username can only contain letters a-z or numbers 0-9
+</p>
+
+<!-- ERROR OBJECT NGFOR IT OVER EACH THING -->

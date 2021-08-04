@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { SignInCredentials, SignUpCredentials } from '../models/index.types';
 import { map } from 'rxjs/operators';
 import { BehaviorSubject } from 'rxjs';
-import { User } from '../models/user.model';
+import { SignInCredentials, User } from 'src/app/types';
+import { SignUpCredentials } from 'src/app/features/register/types';
 
 // TODO find way to persist user login state in Angular app; already stores user login cookie so need a way
 // to access user info when user is signed in, and set to null when user logs out
@@ -31,13 +31,6 @@ export class AuthService {
     return this.http
       .post<{ data: User }>('http://127.0.0.1:4000/api/users', credentials)
       .pipe(map((response) => response.data));
-  }
-
-  // DELETE THIS; ONLY HERE FOR CHECKING COOKIES
-  check() {
-    return this.http.get<any>('http://127.0.0.1:4000/api/users', {
-      withCredentials: true,
-    });
   }
 
   currentUser() {

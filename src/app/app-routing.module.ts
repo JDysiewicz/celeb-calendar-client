@@ -1,10 +1,22 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-// Lazy load modules; best practice (even if not relevant here)
+// Lazy load modules
 const routes: Routes = [
   {
-    path: '',
+    path: 'login',
+    loadChildren: () =>
+      import('./features/login/login.module').then((m) => m.LoginModule),
+  },
+  {
+    path: 'register',
+    loadChildren: () =>
+      import('./features/register/register.module').then(
+        (m) => m.RegisterModule
+      ),
+  },
+  {
+    path: 'calendar',
     loadChildren: () =>
       import('./features/calendar/calendar.module').then(
         (m) => m.CalendarModule
@@ -13,7 +25,7 @@ const routes: Routes = [
   {
     path: '',
     loadChildren: () =>
-      import('./features/account/account.module').then((m) => m.AccountModule),
+      import('./features/home/home.module').then((m) => m.HomeModule),
   },
 ];
 

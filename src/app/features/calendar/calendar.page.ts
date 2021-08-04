@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { MonthString } from 'src/app/core/models/index.types';
+import { MonthString } from 'src/app/types';
 
 @Component({
   selector: 'app-calendar',
-  templateUrl: './calendar.component.html',
-  styleUrls: ['./calendar.component.css'],
+  templateUrl: './calendar.page.html',
+  styleUrls: ['./calendar.page.css'],
 })
-export class CalendarComponent implements OnInit {
+export class CalendarPage implements OnInit {
   // Month wil Date.getMonth() will always be 0-11, so casting is fine here
   month: MonthString;
 
