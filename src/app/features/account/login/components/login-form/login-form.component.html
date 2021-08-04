@@ -1,0 +1,56 @@
+<form id="login-form" (ngSubmit)="onSubmit()" [formGroup]="loginForm">
+  <div class="field">
+    <label class="label">Username</label>
+    <div class="control has-icons-left has-icons-right">
+      <input
+        formControlName="username"
+        class="input"
+        [ngClass]="{ 'is-danger': showErrors('username') }"
+        type="text"
+        placeholder="Enter your username"
+      />
+      <app-icon [icon]="faUser"></app-icon>
+    </div>
+    <div *ngIf="f.username.errors && submitted">
+      <p *ngIf="f.username.errors['required']" class="help is-danger is-size-6">
+        Required
+      </p>
+    </div>
+  </div>
+
+  <div class="field">
+    <label class="label">Password</label>
+    <div class="control has-icons-left has-icons-right">
+      <input
+        formControlName="password"
+        class="input"
+        type="password"
+        [ngClass]="{ 'is-danger': showErrors('password') }"
+        placeholder="Enter your password"
+      />
+      <app-icon [icon]="faLock"></app-icon>
+    </div>
+    <div *ngIf="f.password.errors && submitted">
+      <p *ngIf="f.password.errors['required']" class="help is-danger is-size-6">
+        Required
+      </p>
+    </div>
+  </div>
+
+  <p *ngIf="formErrorMessage" class="help is-danger is-size-6">
+    {{ formErrorMessage }}
+  </p>
+
+  <div class="field is-grouped is-grouped-right">
+    <div class="control">
+      <button
+        form="login-form"
+        [ngClass]="{ 'is-loading': isSubmitting }"
+        class="button is-primary is-loading"
+        type="submit"
+      >
+        Submit
+      </button>
+    </div>
+  </div>
+</form>

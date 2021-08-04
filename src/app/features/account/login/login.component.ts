@@ -1,52 +1,25 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { faLock, faUser } from '@fortawesome/free-solid-svg-icons';
 import { ApiError } from 'src/app/core/models/apiError.model';
 import { AuthService } from 'src/app/core/services/auth.service';
+import { LoginForm } from './types';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
 })
-export class LoginComponent implements OnInit {
-  loginForm: FormGroup;
-  faUser = faUser;
-  faLock = faLock;
-  submitted = false;
+export class LoginComponent {
   isSubmitting = false;
   formErrorMessage = '';
 
-  constructor(
-    private authService: AuthService,
-    private formBuilder: FormBuilder,
-    private router: Router
-  ) {}
+  constructor(private authService: AuthService, private router: Router) {}
 
-  ngOnInit(): void {
-    this.loginForm = this.formBuilder.group({
-      username: ['', [Validators.required]],
-      password: ['', [Validators.required]],
-    });
-  }
-
-  get f() {
-    return this.loginForm.controls;
-  }
-
-  onSubmit() {
-    this.submitted = true;
-
-    if (this.loginForm.invalid) {
-      return;
-    }
+  onSubmit(formValues: LoginForm) {
     this.isSubmitting = true;
 
-    // TODO on sign in redirect to calendar page
-    return this.authService.signIn(this.loginForm.value).subscribe(
+    return this.authService.signIn(formValues).subscribe(
       (response) => {
-        this.loginForm.reset();
         this.authService.user.next(response);
         this.isSubmitting = false;
         alert(`Welcome, ${this.authService.user.getValue()?.username}`);
@@ -65,17 +38,5 @@ export class LoginComponent implements OnInit {
         }
       }
     );
-  }
-
-  // DELETE THIS; ONLY HERE FOR CHECKING COOKIES
-  check() {
-    return this.authService.check().subscribe(
-      (response) => console.log('RES', response),
-      (error) => console.log('ERR', error)
-    );
-  }
-
-  showErrors(inputField: string) {
-    return this.f[inputField].errors && this.submitted;
   }
 }

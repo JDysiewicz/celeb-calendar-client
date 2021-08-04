@@ -1,0 +1,180 @@
+<form id="login-form" (ngSubmit)="onSubmit()" [formGroup]="registerForm">
+  <div class="field">
+    <label class="label">Username*</label>
+    <div class="control has-icons-left has-icons-right">
+      <input
+        formControlName="username"
+        class="input"
+        [ngClass]="{ 'is-danger': showErrors('username') }"
+        type="text"
+        placeholder="Enter a username"
+      />
+      <app-icon [icon]="faUser"></app-icon>
+    </div>
+    <div *ngIf="f.username.errors && submitted">
+      <p *ngIf="f.username.errors['required']" class="help is-danger is-size-6">
+        Required
+      </p>
+      <p
+        *ngIf="f.username.errors['minlength']"
+        class="help is-danger is-size-6"
+      >
+        Username must be at least 3 characters long
+      </p>
+      <p *ngIf="f.username.errors['pattern']" class="help is-danger is-size-6">
+        Username can only contain letters a-z or numbers 0-9
+      </p>
+    </div>
+  </div>
+
+  <div class="field">
+    <label class="label">Account Type*</label>
+    <div class="control select">
+      <select form="registerForm" formControlName="accountType" class="select">
+        <option value="fan">Fan</option>
+        <option value="celeb">Celebrity</option>
+        <option value="manager">Manager</option>
+      </select>
+    </div>
+    <div *ngIf="f.accountType.errors && submitted">
+      <p
+        *ngIf="f.accountType.errors['required']"
+        class="help is-danger is-size-6"
+      >
+        Required
+      </p>
+    </div>
+  </div>
+
+  <div class="field">
+    <label class="label">Password*</label>
+    <div class="control has-icons-left has-icons-right">
+      <input
+        formControlName="password"
+        class="input"
+        type="password"
+        [ngClass]="{ 'is-danger': showErrors('password') }"
+        placeholder="Enter your password"
+      />
+      <app-icon [icon]="faLock"></app-icon>
+    </div>
+    <div *ngIf="f.password.errors && submitted">
+      <p *ngIf="f.password.errors['required']" class="help is-danger is-size-6">
+        Required
+      </p>
+      <p
+        *ngIf="f.password.errors['minlength']"
+        class="help is-danger is-size-6"
+      >
+        Password must contain at least 4 characters
+      </p>
+    </div>
+  </div>
+
+  <div class="field">
+    <label class="label">Confirm Password*</label>
+    <div class="control has-icons-left has-icons-right">
+      <input
+        formControlName="passwordConfirmation"
+        class="input"
+        type="password"
+        [ngClass]="{ 'is-danger': showErrors('passwordConfirmation') }"
+        placeholder="Confirm your password"
+      />
+      <app-icon [icon]="faLock"></app-icon>
+    </div>
+    <div *ngIf="f.passwordConfirmation.errors && submitted">
+      <p
+        *ngIf="f.passwordConfirmation.errors['required']"
+        class="help is-danger is-size-6"
+      >
+        Required
+      </p>
+      <p
+        *ngIf="f.passwordConfirmation.errors['mustMatch']"
+        class="help is-danger is-size-6"
+      >
+        Passwords do not match
+      </p>
+    </div>
+  </div>
+
+  <ng-container *ngIf="f.accountType.value === 'celeb'">
+    <h2 class="title is-4">Celebrity Information</h2>
+    <p>
+      As a celebrity, we request that you add some information so fans can
+      follow you.
+    </p>
+
+    <div class="field">
+      <label class="label">Full Name*</label>
+      <div class="control">
+        <input
+          formControlName="name"
+          class="input"
+          type="text"
+          placeholder="e.g. Nicolas Cage"
+        />
+      </div>
+    </div>
+
+    <div class="field">
+      <label class="label">Description*</label>
+      <div class="control">
+        <textarea
+          formControlName="description"
+          class="textarea"
+          placeholder="e.g. An actor famous for their appearance in numerous films, including 'National Treasure'."
+        ></textarea>
+      </div>
+    </div>
+
+    <div class="field">
+      <label class="label">Instagram Followers*</label>
+      <div class="control">
+        <input
+          formControlName="followers"
+          class="input"
+          type="number"
+          placeholder="e.g. 30000"
+        />
+      </div>
+    </div>
+
+    <div class="field">
+      <label class="label">Image*</label>
+      <div class="control">
+        <input
+          formControlName="image"
+          class="input"
+          type="text"
+          placeholder="e.g. https://en.wikipedia.org/wiki/Nicolas_Cage#/media/File:Nicolas_Cage_Deauville_2013.jpg"
+        />
+      </div>
+    </div>
+
+    <div class="field">
+      <label class="label">Birthday*</label>
+      <div class="control">
+        <input formControlName="birthday" class="input" type="date" />
+      </div>
+    </div>
+  </ng-container>
+
+  <p *ngIf="formErrorMessage" class="help is-danger is-size-6">
+    {{ formErrorMessage }}
+  </p>
+
+  <div class="field is-grouped is-grouped-right">
+    <div class="control">
+      <button
+        form="login-form"
+        [ngClass]="{ 'is-loading': isSubmitting }"
+        class="button is-primary is-loading"
+        type="submit"
+      >
+        Submit
+      </button>
+    </div>
+  </div>
+</form>

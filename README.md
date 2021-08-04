@@ -4,10 +4,12 @@
 
 Angular projects should always follow a similar structure with regards to the use and importing of `modules`:
 
-- **CoreModule**: Defines singletons and services. In here, place all services (e.g. API interactions using HttpClient), and _static_ (will never change regardless of app state) components/guards/models... This should only ever be imported by the AppModule (see below) and no where else. If you need to import the CoreModule elsewhere, you're doing something wrong.
-- **SharedModule**: Imports and re-exports all modules used elsewhere, rather than importing/exporting the same modules into different modules. Feature modules (see below), should only be importing the SharedModule (and any routing module).
-- **FeatureModules**: These should contain components specfic to that feature (e.g. an `accounts` feature could include the `register` and `login` components).
-- **AppModule**: The entry point for Angular applications; imports the CoreModule.
+- **CoreModule**: Defines the plumbing, heating, and electricity of the app. In general, this refers to Services (`.service.ts` files) like HTTP calls, logging, and custom error handling. The `CoreModule` is also suitable for specific-application code (not applicable to other projects at all) which will only be used _once_ in the `AppModule` and no where else. This will usually be things like navbars, footers, and side-menus (this should only ever be used once, so the `SharedModule` is not suitable, and it is needed at the `AppModule` level).
+- **SharedModule**: Defines components, directives, and pipes which are used in multiple components. It can also be used to import and re-export modules used in many `FeatureModules` (e.g. `CommonModule`, `ReactiveFormsModule`, etc) so you end up with cleaner imports on your modules (rather than importing each of those modules multiple times in different `FeatureModules`, you only have to import the `SharedModule` in each of them as the `SharedModule` will export `CommonModule`, `ReactiveFormsModule`...).\*
+- **FeatureModules**: These should contain components specfic to that feature (e.g. an `accounts` feature could include the `register` and `login` components). Feature modules should import the `SharedModule` (but not the `CoreModule`!).
+- **AppModule**: The entry point for Angular applications; imports the CoreModule and defines/delegates routing via lazy-loading.
+
+\* - Note, even though the `SharedModule` may be imported multiple times, you won't end up with the same module twice causing uneccessary bloat to your app - Angular caches these for you so don't worry about it if you import the `SharedModule` in a `FeatureModule` but you only use one or two things from it.
 
 This gives all Angular projects a similar dependency chain and overall architecture.
 

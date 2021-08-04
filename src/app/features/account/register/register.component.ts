@@ -1,12 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { faLock, faUser } from '@fortawesome/free-solid-svg-icons';
+import { Component } from '@angular/core';
+
 import { Router } from '@angular/router';
-import { MustMatch } from 'src/app/core/utils/must-match.validator';
+
 import { SignUpCredentials } from 'src/app/core/models/index.types';
 import { ApiError } from 'src/app/core/models/apiError.model';
 import { CelebSignUp } from 'src/app/core/models/celeb.model';
 import { AuthService } from 'src/app/core/services/auth.service';
+import { RegisterFormValeus } from './types';
 
 @Component({
   selector: 'app-register',
@@ -14,87 +14,26 @@ import { AuthService } from 'src/app/core/services/auth.service';
   styleUrls: ['./register.component.css'],
 })
 export class RegisterComponent {
-  registerForm: FormGroup;
   formErrorMessage = '';
-  faUser = faUser;
-  faLock = faLock;
-  submitted = false;
+
   isSubmitting = false;
 
-  constructor(
-    private authService: AuthService,
-    private formBuilder: FormBuilder,
-    private router: Router
-  ) {}
-
-  ngOnInit(): void {
-    this.registerForm = this.formBuilder.group(
-      {
-        username: [
-          '',
-          [
-            Validators.required,
-            Validators.pattern(/^[a-zA-Z0-9]+$/),
-            Validators.minLength(3),
-            Validators.maxLength(14),
-          ],
-        ],
-        password: [
-          '',
-          [
-            Validators.required,
-            Validators.minLength(4),
-            Validators.maxLength(14),
-          ],
-        ],
-        passwordConfirmation: [
-          '',
-          [
-            Validators.required,
-            Validators.minLength(4),
-            Validators.maxLength(14),
-          ],
-        ],
-        accountType: ['fan', [Validators.required]],
-        name: [''],
-        description: [''],
-        followers: [0],
-        image: [''],
-        birthday: [new Date('1997-09-12')],
-      },
-      {
-        validator: MustMatch('password', 'passwordConfirmation'),
-      }
-    );
-  }
-
-  // Getter for form access
-  get f() {
-    return this.registerForm.controls;
-  }
-
-  showErrors(inputField: string) {
-    return this.f[inputField].errors && this.submitted;
-  }
+  constructor(private authService: AuthService, private router: Router) {}
 
   // TODO on register, redirect to sign in screen
-  onSubmit() {
-    this.submitted = true;
-    if (this.registerForm.invalid) {
-      return;
-    }
+  onSubmit(formValues: RegisterFormValeus) {
     const userParams = {
-      username: this.registerForm.value.username,
-      password: this.registerForm.value.password,
-      perm: this.registerForm.value.accountType,
+      username: formValues.username,
+      password: formValues.password,
+      perm: formValues.accountType,
     };
-    const celebParams = this.registerForm.value.name
+    const celebParams = formValues.name
       ? {
-          name: this.registerForm.value.name,
-          description: this.registerForm.value.description,
-          followers: this.registerForm.value.followers,
-          image: this.registerForm.value.image,
-          birthday: this.registerForm.value.birthday,
+          name: formValues.name,
+          description: formValues.description,
+          followers: formValues.followers,
+          image: formValues.image,
+          birthday: formValues.birthday,
         }
       : null;
     const registerInput: SignUpCredentials = this.buildRegisterInput(
