@@ -12,18 +12,10 @@
       <app-icon [icon]="faUser"></app-icon>
     </div>
     <div *ngIf="f.username.errors && submitted">
-      <!-- <p *ngIf="f.username.errors['required']" class="help is-danger is-size-6">
-        Required
-      </p>
-      <p
-        *ngIf="f.username.errors['minlength'] || f.username.errors['maxlength']"
-        class="help is-danger is-size-6"
-      >
-        Username must be 3-14 characters long
-      </p>
-      <p *ngIf="f.username.errors['pattern']" class="help is-danger is-size-6">
-        Username can only contain letters a-z or numbers 0-9
-      </p> -->
+      <app-form-errors
+        [errorObj]="f.username.errors"
+        [errors]="usernameErrors"
+      ></app-form-errors>
     </div>
   </div>
 
@@ -37,12 +29,10 @@
       </select>
     </div>
     <div *ngIf="f.accountType.errors && submitted">
-      <p
-        *ngIf="f.accountType.errors['required']"
-        class="help is-danger is-size-6"
-      >
-        Required
-      </p>
+      <app-form-errors
+        [errorObj]="f.accountType.errors"
+        [errors]="accountTypeErrors"
+      ></app-form-errors>
     </div>
   </div>
 
@@ -59,15 +49,10 @@
       <app-icon [icon]="faLock"></app-icon>
     </div>
     <div *ngIf="f.password.errors && submitted">
-      <p *ngIf="f.password.errors['required']" class="help is-danger is-size-6">
-        Required
-      </p>
-      <p
-        *ngIf="f.password.errors['minlength']"
-        class="help is-danger is-size-6"
-      >
-        Password must contain at least 4 characters
-      </p>
+      <app-form-errors
+        [errorObj]="f.password.errors"
+        [errors]="passwordErrors"
+      ></app-form-errors>
     </div>
   </div>
 
@@ -84,18 +69,10 @@
       <app-icon [icon]="faLock"></app-icon>
     </div>
     <div *ngIf="f.passwordConfirmation.errors && submitted">
-      <p
-        *ngIf="f.passwordConfirmation.errors['required']"
-        class="help is-danger is-size-6"
-      >
-        Required
-      </p>
-      <p
-        *ngIf="f.passwordConfirmation.errors['mustMatch']"
-        class="help is-danger is-size-6"
-      >
-        Passwords do not match
-      </p>
+      <app-form-errors
+        [errorObj]="f.passwordConfirmation.errors"
+        [errors]="passwordConfirmationErrors"
+      ></app-form-errors>
     </div>
   </div>
 

@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { faLock, faUser } from '@fortawesome/free-solid-svg-icons';
 import { MustMatch } from 'src/app/shared/utils/must-match.validator';
+import { FormError } from 'src/app/types';
 import { RegisterFormValeus } from '../../types';
 
 @Component({
@@ -77,5 +78,41 @@ export class RegisterFormComponent implements OnInit {
     }
 
     this.register.emit(this.registerForm.value);
+  }
+
+  get usernameErrors(): FormError[] {
+    return [
+      { error: 'required', message: 'Required field' },
+      { error: 'minlength', message: 'Username must be 3-14 characters' },
+      { error: 'maxlength', message: 'Username must be 3-14 characters' },
+      {
+        error: 'pattern',
+        message: 'Username can only contain letters a-z or numbers 0-9',
+      },
+    ];
+  }
+
+  get accountTypeErrors(): FormError[] {
+    return [{ error: 'required', message: 'Required field' }];
+  }
+
+  get passwordErrors(): FormError[] {
+    return [
+      { error: 'required', message: 'Required field' },
+      {
+        error: 'minlength',
+        message: 'Password must contain at least 4 characters',
+      },
+    ];
+  }
+
+  get passwordConfirmationErrors(): FormError[] {
+    return [
+      { error: 'required', message: 'Required field' },
+      {
+        error: 'mustMatch',
+        message: 'Passwords do not match',
+      },
+    ];
   }
 }

@@ -17,6 +17,7 @@ import { FormErrorsComponent } from './components/form-errors/form-errors.compon
     FontAwesomeModule,
     IconComponent,
     FormLayoutComponent,
+    FormErrorsComponent,
   ],
 })
 export class SharedModule {}
