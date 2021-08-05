@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { CelebsPage } from './pages/celebs.page';
+import { CelebsPage } from './celebs.page';
 
 const routes: Routes = [{ path: ':month/:day', component: CelebsPage }];
 

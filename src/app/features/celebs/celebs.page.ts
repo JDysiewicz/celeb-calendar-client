@@ -24,11 +24,11 @@ export class CelebsPage implements OnInit {
     const dayStr = this.route.snapshot.paramMap.get('day')!;
     if (!monthStr || !dayStr) return this.router.navigate(['/']);
 
-    const formattedDay = dayStr.padStart(2, '0');
     const month = this.findMonth(monthStr);
     this.month = month.name;
     this.day = dayStr;
 
+    const formattedDay = dayStr.padStart(2, '0');
     const formattedMonth = this.formatMonthStr(month);
     const isoMonthDay = `-${formattedMonth}-${formattedDay}`;
     return (this.celebs$ =
@@ -42,9 +42,4 @@ export class CelebsPage implements OnInit {
   private formatMonthStr(month: Month) {
     return (parseInt(month.idx) + 1).toString().padStart(2, '0');
   }
-
-  private buildTitle(monthName: string, dayStr: string) {
-    return `Celebrities born on ${dayStr} of ${monthName}`;
-  }
-  // GET DATA OUT OF PARAMS, THEN MAKE NETWORK REQUEST FROM THIS USING CELEBSERVICE
 }
