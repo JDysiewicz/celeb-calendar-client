@@ -1,0 +1,33 @@
+<!-- <div class="tile">
+  <div class="card">
+    <div class="card-image">
+      <figure class="image">
+        <img style="max-width: 200px" [src]="celeb.image" alt="alt text here" />
+      </figure>
+    </div>
+    <div class="card-content">
+      <div class="media">
+        <div class="media-content">
+          <p class="title is-4">{{ celeb.name }}</p>
+          <p class="subtitle is-6">{{ celeb.birthday }}</p>
+        </div>
+      </div>
+
+      <div class="content">
+        {{ celeb.description }}
+      </div>
+    </div>
+  </div>
+</div> -->
+<div class="tile is-parent">
+  <article class="tile is-child box">
+    <p class="title has-text-centered has-text-primary">{{ celeb.name }}</p>
+    <p class="subtitle has-text-centered">{{ celeb.birthday }}</p>
+    <figure class="image is-4by3">
+      <img [src]="celeb.image" />
+    </figure>
+    <div style="padding-top: 1rem" class="content is-size-5">
+      <p>{{ celeb.description }}</p>
+    </div>
+  </article>
+</div>

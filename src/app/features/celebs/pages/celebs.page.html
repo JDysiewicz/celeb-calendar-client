@@ -1,9 +1,14 @@
 <app-page-layout>
   <app-celeb-page-header [month]="month" [day]="day"></app-celeb-page-header>
 
-  <div *ngIf="celebs$ | async as celebs">
-    <ul>
-      <li *ngFor="let celeb of celebs">{{celeb | json}}}</li>
-    </ul>
-  </div>
+  <ng-container *ngIf="celebs$ | async as celebs">
+    <div class="tile is-ancestor">
+      <app-celeb-info
+        class="has-text-centered"
+        *ngFor="let celeb of celebs"
+        [celeb]="celeb"
+      >
+      </app-celeb-info>
+    </div>
+  </ng-container>
 </app-page-layout>
