@@ -6,9 +6,19 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { IconComponent } from './components/icon/icon.component';
 import { FormLayoutComponent } from './components/form-layout/form-layout.component';
 import { FormErrorsComponent } from './components/form-errors/form-errors.component';
+import { PageTitleComponent } from './components/page-title/page-title.component';
+import { PageLayoutComponent } from './components/page-layout/page-layout.component';
+import { DaySuffix } from './pipes/day-suffix.pipe';
 
 @NgModule({
-  declarations: [IconComponent, FormLayoutComponent, FormErrorsComponent],
+  declarations: [
+    IconComponent,
+    FormLayoutComponent,
+    FormErrorsComponent,
+    PageTitleComponent,
+    PageLayoutComponent,
+    DaySuffix,
+  ],
   imports: [CommonModule, RouterModule, ReactiveFormsModule, FontAwesomeModule],
   exports: [
     CommonModule,
@@ -18,6 +28,9 @@ import { FormErrorsComponent } from './components/form-errors/form-errors.compon
     IconComponent,
     FormLayoutComponent,
     FormErrorsComponent,
+    PageTitleComponent,
+    PageLayoutComponent,
+    DaySuffix,
   ],
 })
 export class SharedModule {}

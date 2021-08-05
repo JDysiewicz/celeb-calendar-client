@@ -1,21 +1,11 @@
-<h1>Calendar</h1>
+<app-page-layout>
+  <app-calendar-header
+    [currentMonth]="currentMonth"
+    (changeMonth)="changeMonth($event)"
+  ></app-calendar-header>
 
-<h3>
-  Current Month = {{ monthObj[month].name }}. This has
-  {{ monthObj[month].days }} days.
-</h3>
-<button (click)="changeMonth(-1)">Prev Month</button>
-<button (click)="changeMonth(1)">Next Month</button>
-
-<section class="calendar-wrapper">
-  <div class="calendar">
-    <div
-      class="cell"
-      *ngFor="let day of [].constructor(monthObj[month].days); index as i"
-    >
-      <p>
-        <b>{{ i + 1 }}</b>
-      </p>
-    </div>
-  </div>
-</section>
+  <app-calendar-wrapper
+    (viewCelebs)="redirectToCelebs($event)"
+    [currentMonth]="currentMonth"
+  ></app-calendar-wrapper>
+</app-page-layout>

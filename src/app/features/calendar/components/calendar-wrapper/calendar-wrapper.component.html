@@ -1,0 +1,10 @@
+<section class="calendar-wrapper">
+  <div class="calendar">
+    <ng-container
+      *ngFor="let _ of [].constructor(currentMonth.days); index as i"
+    >
+      <app-calendar-cell (viewCelebs)="getCelebs($event)" [day]="i + 1">
+      </app-calendar-cell>
+    </ng-container>
+  </div>
+</section>

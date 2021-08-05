@@ -1,5 +1,5 @@
 <app-form-layout>
-  <h1 class="title is-2">Create an account</h1>
+  <app-page-title [title]="'Create an account'"></app-page-title>
   <app-register-form
     (register)="onSubmit($event)"
     [isSubmitting]="isSubmitting"

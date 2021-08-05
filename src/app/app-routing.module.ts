@@ -23,6 +23,11 @@ const routes: Routes = [
       ),
   },
   {
+    path: 'celebs',
+    loadChildren: () =>
+      import('./features/celebs/celebs.module').then((m) => m.CelebsModule),
+  },
+  {
     path: '',
     loadChildren: () =>
       import('./features/home/home.module').then((m) => m.HomeModule),

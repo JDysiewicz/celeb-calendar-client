@@ -1,0 +1,9 @@
+<app-page-layout>
+  <app-celeb-page-header [month]="month" [day]="day"></app-celeb-page-header>
+
+  <div *ngIf="celebs$ | async as celebs">
+    <ul>
+      <li *ngFor="let celeb of celebs">{{celeb | json}}}</li>
+    </ul>
+  </div>
+</app-page-layout>

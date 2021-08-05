@@ -1,0 +1,19 @@
+<div
+  id="calendar-header-root"
+  class="container is-flex is-flex-direction-column is-align-content-center"
+>
+  <app-page-title [title]="'Calendar of Famous Birthdays'"></app-page-title>
+  <h2 class="title is-size-4 has-text-centered has-text-primary">
+    {{ currentMonth.name }}
+  </h2>
+  <div
+    class="
+      is-flex is-flex-direction-row is-justify-content-center
+      field
+      is-grouped
+    "
+  >
+    <button class="button" (click)="emitChangeMonth(-1)">Prev Month</button>
+    <button class="button" (click)="emitChangeMonth(1)">Next Month</button>
+  </div>
+</div>
